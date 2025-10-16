@@ -1,0 +1,174 @@
+/* ========== THEME TOKENS ========== */
+:root{
+  --bg: #0f172a;            /* deep navy */
+  --panel:#111827;          /* dark panel */
+  --text:#e5e7eb;           /* light text */
+  --muted:#9ca3af;          /* muted text */
+  --accent:#f59e0b;         /* AMBER accent */
+  --accent-2:#22c55e;       /* optional friendly green */
+  --border: rgba(255,255,255,.08);
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 12px;           /* slightly rounded */
+  --space: 2.25rem;         /* cozy section spacing */
+}
+
+/* ========== GLOBAL BASE ========== */
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+img, video{ max-width: 100%; height: auto; display: block; }
+
+a{ color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip link for keyboard users */
+.skip{
+  position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip:focus{ position:static; width:auto; height:auto; padding:.5rem; background:#111827; border:1px solid var(--border); }
+
+/* ========== LAYOUT HELPERS ========== */
+.wrap{ width: min(1100px, 92vw); margin: 0 auto; padding: .9rem 0; }
+.section{ padding: var(--space) 0; scroll-margin-top: 76px; } /* anchor offset below sticky header */
+.card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.35rem;
+  box-shadow: var(--shadow);  /* soft shadow */
+}
+.center{ text-align: center; }
+.lead{ color: var(--muted); font-size: 1.05rem; }
+
+/* ========== HEADER (SOLID STICKY BAR) ========== */
+.site-header{
+  position: sticky; top: 0; z-index: 50;
+  background: #0f172a;       /* solid */
+  border-bottom: 1px solid var(--border);
+}
+.site-header .wrap{
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.brand{
+  display: inline-flex; align-items: center; gap: .6rem;
+  text-decoration: none; font-weight: 800; letter-spacing: .3px;
+}
+.logo{ height: 40px; width: auto; } /* per your choice */
+.brand-name{ display: none; }       /* show logo only for now; switch on later if you like */
+
+.nav ul{ display: flex; gap: .5rem; list-style: none; margin:0; padding:0; flex-wrap: wrap; }
+.nav a{
+  color: var(--muted); text-decoration: none;
+  padding: .45rem .7rem; border-radius: .5rem;
+}
+.nav a:hover{ color: #fff; background: rgba(255,255,255,.06); }
+
+/* ========== HERO (no image yet; clean dark panel) ========== */
+.hero .wrap > *{ margin-left: auto; margin-right: auto; }
+.hero .btn{ margin-right: .5rem; }
+.cta-row{ display:flex; gap:.6rem; flex-wrap: wrap; }
+
+/* ========== BUTTONS ========== */
+.btn{
+  display: inline-block;
+  background: var(--accent);      /* amber */
+  color: #1f1300;                 /* high contrast on amber */
+  font-weight: 800;
+  border: none;
+  border-radius: var(--radius);
+  padding: .65rem .95rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease;
+}
+.btn:hover{ filter: brightness(1.03); }
+.btn:active{ transform: translateY(1px); }
+.btn.secondary{
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* ========== ABOUT ========== */
+.about-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: .9rem;                     /* cozy */
+}
+.about-card{ background: rgba(255,255,255,.03); border:1px solid var(--border); border-radius: var(--radius); padding: .9rem 1rem; }
+
+/* ========== STORIES ========== */
+.stories{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .9rem;
+}
+.story img{ border-radius: var(--radius); border:1px solid var(--border); }
+.story figure{ margin:0 0 .5rem; }
+
+/* ========== DONATE (placeholder) ========== */
+.donation-impact{ margin:.75rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+
+/* ========== HOW YOU CAN HELP ========== */
+.help-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: .9rem;
+}
+.help-card{ background: rgba(255,255,255,.03); border:1px solid var(--border); border-radius: var(--radius); padding: .9rem 1rem; }
+
+/* ========== GALLERY (3 / 2 / 1 responsive) ========== */
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .6rem;
+}
+.gallery img{
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+@media (max-width: 900px){
+  .gallery{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .gallery{ grid-template-columns: 1fr; }
+}
+
+/* ========== CONTACTS ========== */
+address{ font-style: normal; color: var(--muted); }
+.social{ display: flex; gap:.75rem; margin: .5rem 0 1rem; flex-wrap: wrap; }
+.contact-form{
+  display: grid; gap: .75rem;
+  margin-top: .75rem;
+}
+.contact-form input, .contact-form textarea{
+  width:100%;
+  padding:.75rem;
+  border-radius: 10px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder{ color: #cbd5e1; }
+
+/* ========== FOOTER ========== */
+.site-footer{
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  padding: 1rem 0;
+}
+
+/* ========== SMALL TWEAKS ========== */
+ul{ padding-left: 1.2rem; }
+h1,h2,h3{ line-height: 1.25; margin: 0 0 .4rem; }
+p{ margin: 0 0 .6rem; }
