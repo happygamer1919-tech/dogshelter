@@ -5,22 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Puppy Shelter Coin</title>
   <meta name="description" content="Providing care, shelter, and second chances for puppies and dogs. Your help is considered and appreciated." />
-  <!-- Favicon/logo placeholder: replace with your real logo file later -->
-  <link rel="icon" href="assets/logo.png">
+  <link rel="icon" href="assets/logo.png" />
+  <!-- ✅ make sure style.css exists in the repo root -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Skip link for accessibility -->
   <a href="#main" class="skip">Skip to content</a>
 
-  <!-- Site Header -->
   <header class="site-header" role="banner">
     <div class="wrap">
       <a class="brand" href="#home" aria-label="Puppy Shelter Coin home">
-        <!-- Replace src when you have a logo -->
         <img src="assets/logo.png" alt="Puppy Shelter Coin logo" class="logo">
-        <span class="brand-name">Puppy Shelter Coin</span>
       </a>
-
       <nav class="nav" aria-label="Primary">
         <ul>
           <li><a href="#home">Home</a></li>
@@ -34,26 +30,25 @@
   </header>
 
   <main id="main" tabindex="-1">
-    <!-- Hero -->
+    <!-- HERO -->
     <section id="home" class="section hero" aria-labelledby="hero-title">
       <div class="wrap">
-        <h1 id="hero-title">Your help is considered and appreciated</h1>
-        <p class="lead">We give puppies and dogs a safe home, care, food, and love—until they thrive.</p>
-        <p class="cta-row">
-          <a href="#help" class="btn">See how you can help</a>
-          <a href="#donate" class="btn secondary">Donate</a>
-        </p>
-        <!-- Optional hero image/video placeholders -->
-        <!-- <img src="assets/hero.jpg" alt="Happy rescued dog" class="hero-media"> -->
-        <!-- <video class="hero-media" src="assets/hero.mp4" controls poster="assets/hero.jpg"></video> -->
+        <div class="card center">
+          <h1 id="hero-title">Your help is considered and appreciated</h1>
+          <p class="lead">We give puppies and dogs a safe home, care, food, and love—until they thrive.</p>
+          <p class="cta-row">
+            <a href="#help" class="btn">See how you can help</a>
+            <a href="#donate" class="btn secondary">Donate</a>
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about" class="section" aria-labelledby="about-title">
       <div class="wrap">
         <h2 id="about-title">Our best friend’s Shelter</h2>
-        <p>We’re a volunteer-led shelter devoted to puppies and dogs in need—rescue, rehabilitation, and lifelong care. Transparency, compassion, and community support guide every decision.</p>
+        <p>We’re a volunteer-led shelter devoted to puppies and dogs in need—rescue, rehabilitation, and lifelong care.</p>
         <div class="about-grid">
           <article class="about-card">
             <h3>What we do</h3>
@@ -71,24 +66,18 @@
       </div>
     </section>
 
-    <!-- Lives Transformed (Stories) -->
+    <!-- STORIES -->
     <section id="stories" class="section" aria-labelledby="stories-title">
       <div class="wrap">
         <h2 id="stories-title">Lives transformed</h2>
         <div class="stories">
-          <article class="story">
-            <figure>
-              <img src="assets/stories/story1.jpg" alt="Dog relaxing in a safe, warm bed">
-              <figcaption>From fear to trust—your support made this possible.</figcaption>
-            </figure>
+          <article class="story card">
+            <img src="assets/stories/story1.jpg" alt="Dog relaxing in a safe, warm bed">
             <h3>Hope’s new chapter</h3>
-            <p>Found hungry and scared, Hope now greets everyone with a tail wag and a smile.</p>
+            <p>From fear to trust—your support made this possible.</p>
           </article>
-          <article class="story">
-            <figure>
-              <img src="assets/stories/story2.jpg" alt="Playful puppy with a volunteer in the yard">
-              <figcaption>Play, patience, and proper care build confidence.</figcaption>
-            </figure>
+          <article class="story card">
+            <img src="assets/stories/story2.jpg" alt="Playful puppy with a volunteer">
             <h3>Buddy learns to play</h3>
             <p>With gentle training and enrichment, Buddy rediscovered curiosity and fun.</p>
           </article>
@@ -96,12 +85,11 @@
       </div>
     </section>
 
-    <!-- Donate -->
+    <!-- DONATE -->
     <section id="donate" class="section" aria-labelledby="donate-title">
       <div class="wrap">
         <h2 id="donate-title">Donate</h2>
         <p>Every contribution supports food, medical care, shelter improvements, and rescue logistics.</p>
-        <!-- When you have the link, replace the # below -->
         <p><a class="btn" href="#" rel="noopener">Donate now</a></p>
         <ul class="donation-impact">
           <li><strong>$10</strong> — one day of food for a puppy</li>
@@ -111,7 +99,7 @@
       </div>
     </section>
 
-    <!-- How You Can Help -->
+    <!-- HELP -->
     <section id="help" class="section" aria-labelledby="help-title">
       <div class="wrap">
         <h2 id="help-title">How you can help</h2>
@@ -135,43 +123,32 @@
       </div>
     </section>
 
-    <!-- Gallery -->
+    <!-- GALLERY -->
     <section id="gallery" class="section" aria-labelledby="gallery-title">
       <div class="wrap">
         <h2 id="gallery-title">Shelter gallery</h2>
         <p class="muted">Photos and videos from the yard, playrooms, and vet visits.</p>
         <div class="gallery">
-          <!-- Replace with your real assets later -->
           <img src="assets/gallery/gallery1.jpg" alt="Puppy with a bright bandana">
           <img src="assets/gallery/gallery2.jpg" alt="Two dogs walking with a volunteer">
           <img src="assets/gallery/gallery3.jpg" alt="Puppies playing together">
-          <img src="assets/gallery/gallery4.jpg" alt="Dog receiving treats at the vet">
-          <!-- Optional video embed (keep for later if you want)
-          <video controls poster="assets/gallery/video-cover.jpg">
-            <source src="assets/gallery/clip.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video> -->
         </div>
       </div>
     </section>
 
-    <!-- Contacts -->
+    <!-- CONTACT -->
     <section id="contact" class="section" aria-labelledby="contact-title">
       <div class="wrap">
         <h2 id="contact-title">Contacts</h2>
         <address>
-          <!-- Replace placeholders when ready -->
           <p>Email: <a href="mailto:contact@email">contact email</a></p>
           <p>Phone: <a href="tel:+10000000000">phone</a></p>
           <p>Location: <span>city / region (to be updated)</span></p>
         </address>
         <div class="social">
-          <!-- Add real links later -->
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="YouTube">YouTube</a>
         </div>
-
-        <!-- Optional contact form (no backend yet) -->
         <form class="contact-form" action="#" method="post">
           <div>
             <label for="name">Your name</label>
@@ -197,6 +174,7 @@
     </div>
   </footer>
 
-  <!-- No CSS/JS yet. We’ll add styles and behavior in the next stages. -->
+  <!-- ✅ make sure script.js exists in the repo root -->
+  <script src="script.js" defer></script>
 </body>
 </html>
