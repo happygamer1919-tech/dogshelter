@@ -18,13 +18,13 @@ const obs = new IntersectionObserver((entries)=>{
 sections.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
 
 // Reveal-on-scroll
-document.querySelectorAll('.about-card,.story,.help-card,.gallery img,.card')
+document.querySelectorAll('.about-card,.help-card,.gallery img,.card')
   .forEach(el => {
     el.classList.add('reveal');
     new IntersectionObserver(([e],o)=>{ if(e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }, {threshold:0.15}).observe(el);
   });
 
-// Simple gallery lightbox
+// Lightbox for gallery images
 const gallery = document.querySelector('.gallery');
 if (gallery){
   const lb = document.createElement('div'); lb.className = 'lightbox';
