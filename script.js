@@ -1,4 +1,4 @@
-// Smooth scroll for nav
+/* ========= Smooth scroll for nav ========= */
 document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
@@ -7,157 +7,93 @@ document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
   });
 });
 
-// Year/* Smooth scroll for nav links */
-document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const id = a.getAttribute('href');
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-/* Year in footer */
+/* ========= Year ========= */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Wallet donate integration
-   - We call the host's openModal() when it exists.
-   - If their script isn't ready yet, we show a friendly message. */
-function donateNow(){
-  if (typeof window.openModal === 'function') {
-    try { window.openModal(); }
-    catch (e) { alert('Donation widget not available right now. Please try again shortly.'); }
-  } else {
-    alert('Donation widget is still loading. Please try again in a moment.');
+/* ========= Wallet modal integration =========
+   - The host provides window.openModal() when the script in <head> is loaded.
+   - We try to call it; if not ready, show a gentle message.
+*/
+window.donateNow = function donateNow () {
+  try {
+    if (typeof window.openModal === 'function') {
+      window.openModal();               // host-provided
+      return;
+    }
+  } catch (e) {
+    alert('Donation widget not available right now. Please try again shortly.');
+    return;
   }
-}
-window.donateNow = donateNow; // make callable from inline onclick
+  alert('Donation widget is still loading. Please try again in a moment.');
+};
 
-/* ----- Gallery loader -----
-   Priority:
-   1) Try assets/gallery/manifest.json (JSON array of filenames)
-   2) Fallback to data-files attribute on #galleryGrid
--------------------------------- */
-async function loadGallery() {
+/* ========= Stories images =========
+   Expects assets/stories/Hope.JPG, Max.JPG, Luna.JPG
+   Case-sensitive names (as uploaded).
+*/
+(function attachStoryImages () {
+  document.querySelectorAll('.story-card').forEach(card => {
+    const fn = card.getAttribute('data-img');
+    const media = card.querySelector('.story-media');
+    if (fn && media) {
+      media.style.backgroundImage = `url(assets/stories/${fn})`;
+    }
+  });
+})();
+
+/* ========= Gallery =========
+   Two ways to provide file names (case-sensitive):
+   1) Put a comma-separated list in #galleryGrid data-files
+   2) Or edit the GALLERY_FILES array below
+*/
+const GALLERY_FILES = [
+  // Example fallback; add more or leave empty if you use data-files in HTML
+  'DSC04148_result.JPG',
+  'DSC04150_result.JPG',
+];
+
+(function buildGallery () {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
 
+  // From data-files attribute?
+  const attr = (grid.getAttribute('data-files') || '').trim();
   let files = [];
-
-  // Try manifest.json
-  try {
-    const res = await fetch('assets/gallery/manifest.json', { cache: 'no-store' });
-    if (res.ok) {
-      const arr = await res.json();
-      if (Array.isArray(arr)) files = arr.map(String);
-    }
-  } catch (_) { /* ignore */ }
-
-  // Fallback: data-files
-  if (!files.length) {
-    const attr = (grid.dataset.files || '').trim();
-    if (attr) files = attr.split(',').map(s => s.trim()).filter(Boolean);
-  }
-
-  // Render
-  grid.innerHTML = '';
-  if (!files.length) {
-    grid.innerHTML = `<p class="hint">No images listed yet.</p>`;
-    return;
-  }
-
-  for (const name of files) {
-    // Be exact with filename case; files live in assets/gallery/
-    const href = `assets/gallery/${name}`;
-    const a = document.createElement('a');
-    a.href = href;
-    a.className = 'gallery-item';
-    a.target = '_blank';
-    a.rel = 'noopener';
-
-    const img = document.createElement('img');
-    img.src = href;
-    img.alt = 'Shelter photo';
-    img.loading = 'lazy';
-
-    a.appendChild(img);
-    grid.appendChild(a);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', loadGallery);
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* -------------------------------
-   Wallet modal integration
-   - We call the host’s openModal() when it’s present.
-   - While the host script initializes, show a gentle message.
--------------------------------- */
-function donateNow() {
-  if (typeof window.openModal === 'function') {
-    try { window.openModal(); }
-    catch (e) { alert('Donation widget not available right now. Please try again shortly.'); }
+  if (attr.length) {
+    files = attr.split(',').map(s => s.trim()).filter(Boolean);
   } else {
-    alert('Donation widget is still loading. Please try again in a moment.');
+    files = GALLERY_FILES.slice();
   }
+
+  // Render tiles
+  grid.innerHTML = '';
+  files.forEach(name => {
+    const fig = document.createElement('figure');
+    fig.innerHTML = `<img loading="lazy" src="assets/gallery/${name}" alt="${name}" />`;
+    fig.addEventListener('click', () => openLightbox(`assets/gallery/${name}`, name));
+    grid.appendChild(fig);
+  });
+})();
+
+/* ========= Lightbox ========= */
+function openLightbox (src, alt) {
+  const lb = document.getElementById('lightbox');
+  const img = lb.querySelector('.lightbox__img');
+  img.src = src; img.alt = alt || '';
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden', 'false');
 }
-window.donateNow = donateNow;
-
-/* -------------------------------
-   Gallery
-   - The grid pulls from (1) data-files attribute on #galleryGrid
-     and (2) the fallback array below.
-   - Add more file names there or into data-files as
-     comma-separated values.
--------------------------------- */
-const galleryRoot = document.getElementById('galleryGrid');
-
-// Files listed directly in HTML (data-files)
-const listFromHTML = (galleryRoot?.dataset.files || '')
-  .split(',')
-  .map(s => s.trim())
-  .filter(Boolean);
-
-// Fallback defaults — add more if you want without editing HTML
-const fallbackGallery = [
-  'DSC04148_result.JPG',
-  'DSC04150_result.JPG'
-];
-
-// Merge & de-dup
-const galleryFiles = Array.from(new Set([...listFromHTML, ...fallbackGallery]));
-
-// Render thumbnails
-if (galleryRoot) {
-  for (const file of galleryFiles) {
-    const src = `assets/gallery/${file}`;
-    const img = new Image();
-    img.className = 'gallery-thumb';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.alt = 'Shelter photo';
-    img.src = src;
-    img.onclick = () => openLightbox(src);
-    // Only append if it exists (optional: try/catch on error)
-    img.onerror = () => img.remove();
-    galleryRoot.appendChild(img);
-  }
-}
-
-/* -------------------------------
-   Lightbox
--------------------------------- */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-
-function openLightbox(src) {
-  lightboxImg.src = src;
-  lightbox.classList.add('show');
-  lightbox.setAttribute('aria-hidden', 'false');
-}
-function closeLightbox() {
-  lightbox.classList.remove('show');
-  lightbox.setAttribute('aria-hidden', 'true');
-  lightboxImg.src = '';
-}
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
+window.closeLightbox = function () {
+  const lb = document.getElementById('lightbox');
+  const img = lb.querySelector('.lightbox__img');
+  img.src = ''; img.alt = '';
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
+};
+// Close lightbox on backdrop click or ESC
+document.getElementById('lightbox')?.addEventListener('click', (e) => {
+  if (e.target.id === 'lightbox') closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
