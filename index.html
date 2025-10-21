@@ -3,31 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dalyan Dog — Every dog deserves a safe home</title>
-  <meta name="description" content="Volunteer-led shelter rescuing and caring for dogs in Dalyan. Foster, donate, or share to help pups thrive." />
-  <link rel="icon" href="assets/logo.png" />
+  <title>Dalyan Dog — Our best friend’s shelter</title>
+  <meta name="description" content="We rescue, feed, heal, and love—until tails wag for good. Join us to keep Dalyan’s pups safe and thriving." />
 
-  <!-- Site styles -->
+  <link rel="icon" href="assets/logo.png" />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Host requirement: load the external donation widget -->
+  <!-- Host’s wallet script (as requested) -->
   <script type="module" src="https://dalyandog.net/_nuxt/assets/index.js"></script>
 </head>
 <body>
-  <!-- Skip link -->
-  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Header / Nav -->
-  <header class="site-header" role="banner">
-    <div class="wrap nav-wrap">
-      <a href="#hero" class="brand" aria-label="Dalyan Dog home">
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#hero" class="brand">
         <img src="assets/logo.png" alt="Dalyan Dog logo" class="logo" />
-        <span class="brand-name">Dalyan Dog</span>
+        <span class="brand-text">Dalyan Dog</span>
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
-        <ul id="navMenu" class="nav-list">
+        <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#help">How to Help</a></li>
           <li><a href="#stories">Stories</a></li>
@@ -39,142 +35,139 @@
     </div>
   </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section id="hero" class="hero section">
-      <div class="wrap hero-inner">
-        <h1 class="display">Every dog deserves a safe home.</h1>
-        <p class="lead">
-          We rescue, feed, heal, and love—until tails wag for good. Join us to keep Dalyan’s pups safe and thriving.
-        </p>
-        <div class="cta-row">
-          <a href="#about" class="btn">Learn more</a>
-          <!-- Single Donate button; literal onclick required by host -->
-          <a href="#" id="donateBtn" class="btn btn-amber" onclick="openModal()">Donate</a>
-        </div>
-      </div>
-    </section>
+  <!-- ===== Hero ===== -->
+  <section id="hero" class="hero section">
+    <div class="wrap">
+      <h1>Every dog deserves a safe home.</h1>
+      <p>We provide care, food, and love—until they thrive. Learn how you can support the shelter.</p>
 
-    <!-- About -->
-    <section id="about" class="section">
-      <div class="wrap">
-        <h2>About the Shelter</h2>
+      <div class="hero-actions">
+        <a href="#about" class="btn">Learn more</a>
+        <button class="btn btn-amber" onclick="donateNow()">Donate</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <h2>About the Shelter</h2>
+      <p>
+        Volunteer-led rescue, rehabilitation, and lifelong care. Transparent and community-backed.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== How to Help ===== -->
+  <section id="help" class="section">
+    <div class="wrap">
+      <h2>How you can help</h2>
+      <ul class="help-list">
+        <li>Volunteer at the shelter</li>
+        <li>Foster a dog temporarily</li>
+        <li>Donate supplies (food, toys, meds)</li>
+        <li>Share our stories on social</li>
+        <li>Support monthly to cover basics</li>
+      </ul>
+
+      <!-- Sponsorship / fundraiser card — text only, no buttons -->
+      <div class="card no-button">
         <p>
-          Volunteer-led rescue, rehabilitation, and lifelong care. Transparent and community-backed. We focus on safe
-          housing, good food, medical care, enrichment, and socialization for dogs of all ages.
+          Want to help as a business sponsor or organize a fundraiser? We’d love to talk.
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- How to Help -->
-    <section id="help" class="section section-alt">
-      <div class="wrap">
-        <h2>How you can help</h2>
-        <div class="cards three">
-          <article class="card">
-            <h3>Volunteer</h3>
-            <p>Join us at the shelter: walks, cleaning, feeding, enrichment, and cuddles.</p>
-          </article>
-          <article class="card">
-            <h3>Foster</h3>
-            <p>Give a temporary home to recover, socialize, and prepare for adoption or sanctuary life.</p>
-          </article>
-          <article class="card">
-            <h3>Donate & Share</h3>
-            <p>Help cover food, meds, and vet bills — and share our stories on social media.</p>
-          </article>
-        </div>
+  <!-- ===== Stories ===== -->
+  <section id="stories" class="section">
+    <div class="wrap">
+      <h2>Stories</h2>
 
-        <!-- Keep text only (no button) as requested -->
-        <div class="note card-outline">
-          <p>
-            Want to help as a business sponsor or organize a fundraiser? We’d love to talk.
-          </p>
-        </div>
+      <div class="story-grid">
+        <article class="story-card">
+          <img src="assets/stories/Hope.JPG" alt="Hope’s new chapter" class="story-photo" loading="lazy" decoding="async" width="1200" height="800" />
+          <h3>Hope’s new chapter</h3>
+          <p>Found hungry and scared, Hope now greets everyone with a tail wag and a smile.</p>
+        </article>
+
+        <article class="story-card">
+          <img src="assets/stories/Max.JPG" alt="Max’s recovery" class="story-photo" loading="lazy" decoding="async" width="1200" height="800" />
+          <h3>Max’s recovery</h3>
+          <p>After surgery and weeks of care, Max finally runs again — ears flying, pure joy.</p>
+        </article>
+
+        <article class="story-card">
+          <img src="assets/stories/Luna.JPG" alt="Luna finds her pack" class="story-photo" loading="lazy" decoding="async" width="1200" height="800" />
+          <h3>Luna finds her pack</h3>
+          <p>Luna was shy and shut down. Today she plays, naps in sunshine, and trusts again.</p>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Stories -->
-    <section id="stories" class="section">
-      <div class="wrap">
-        <h2>Stories</h2>
-        <div class="story-grid">
-          <article class="story">
-            <div class="story-img ph"></div>
-            <h3>Hope’s new chapter</h3>
-            <p>Found hungry and scared, Hope now greets everyone with a tail wag and a smile.</p>
-          </article>
-          <article class="story">
-            <div class="story-img ph"></div>
-            <h3>Max’s recovery</h3>
-            <p>After surgery and weeks of care, Max finally runs again — ears flying, pure joy.</p>
-          </article>
-          <article class="story">
-            <div class="story-img ph"></div>
-            <h3>Luna finds her pack</h3>
-            <p>Luna was shy and shut down. Today she plays, naps in sunshine, and trusts again.</p>
-          </article>
-        </div>
+  <!-- ===== Gallery ===== -->
+  <section id="gallery" class="section">
+    <div class="wrap">
+      <h2>Gallery</h2>
+      <!-- JS will populate thumbnails into this grid -->
+      <div id="galleryGrid" class="gallery-grid"
+           data-files="DSC04148_result.JPG,DSC04150_result.JPG"></div>
+
+      <p class="muted small">
+        Tip: Add more filenames (comma-separated) to the
+        <code>data-files</code> attribute above, or edit the array in <code>script.js</code>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close" onclick="closeLightbox()">×</button>
+    <img id="lightboxImg" alt="">
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="section">
+    <div class="wrap">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Where are you located?</summary>
+        <p>Dalyan, Türkiye. Find us on the map below.</p>
+      </details>
+
+      <details>
+        <summary>Can I visit the shelter?</summary>
+        <p>Absolutely—please email first so we can schedule a good time.</p>
+      </details>
+
+      <details>
+        <summary>What supplies do you need most?</summary>
+        <p>Food, flea/tick meds, dewormers, toys, blankets, cleaning items.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== Contact (boxed) ===== -->
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h2>Contact</h2>
+
+      <div class="contact-card">
+        <p><strong>Email:</strong> <a href="mailto:dalyandog@gmail.com">dalyandog@gmail.com</a></p>
+        <p><strong>Twitter/X:</strong> <a href="https://x.com/dalyandog?s=11" target="_blank" rel="noopener">x.com/dalyandog</a></p>
+        <a class="btn btn-dark" href="https://maps.app.goo.gl/J3ukzhdgQ8kR3PN99?g_st=it" target="_blank" rel="noopener">Find us on Google Maps</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Gallery -->
-    <section id="gallery" class="section section-alt">
-      <div class="wrap">
-        <h2>Gallery</h2>
-        <p class="muted">
-          A few recent moments from the shelter. Upload your images to <code>assets/gallery/</code> and they’ll appear here.
-        </p>
-        <div id="galleryGrid" class="gallery-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section">
-      <div class="wrap">
-        <h2>FAQ</h2>
-        <div class="faq">
-          <details>
-            <summary>Where are you located?</summary>
-            <p>We are in Dalyan (Turkey). See the map in the contact section below.</p>
-          </details>
-          <details>
-            <summary>Can I visit the shelter?</summary>
-            <p>Yes! Please reach out to schedule a time so we can welcome you properly.</p>
-          </details>
-          <details>
-            <summary>What do donations cover?</summary>
-            <p>Food, vet care, meds, vaccinations, bedding, enrichment, and maintenance.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact (boxed) -->
-    <section id="contact" class="section section-alt">
-      <div class="wrap">
-        <h2>Contact</h2>
-        <div class="contact-box card">
-          <p><strong>Email:</strong> <a href="mailto:dalyandog@gmail.com">dalyandog@gmail.com</a></p>
-          <p><strong>Twitter/X:</strong> <a href="https://x.com/dalyandog" target="_blank" rel="noopener">x.com/dalyandog</a></p>
-          <p>
-            <a class="btn" href="https://maps.app.goo.gl/J3ukzhdgQ8kR3PN99?g_st=it" target="_blank" rel="noopener">
-              Find us on Google Maps
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="wrap">
-      <p>© <span id="year"></span> Dalyan Dog · Cozy rescue · All love, no leftovers.</p>
+      <p>© <span id="year"></span> Dalyan Dog · Cozy Rescue</p>
     </div>
   </footer>
 
-  <!-- Site script -->
   <script src="script.js"></script>
 </body>
 </html>
