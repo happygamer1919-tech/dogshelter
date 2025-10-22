@@ -1,5 +1,5 @@
 /* ========= Smooth scroll for nav ========= */
-document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
+document.querySelectorAll('.nav a[href^="#"], .brand[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
     const id = a.getAttribute('href');
@@ -7,82 +7,73 @@ document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
   });
 });
 
-/* ========= Year ========= */
+/* ========= Dynamic year ========= */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ========= Wallet modal integration =========
-   - The host provides window.openModal() when the script in <head> is loaded.
-   - We try to call it; if not ready, show a gentle message.
-*/
-window.donateNow = function donateNow () {
-  try {
-    if (typeof window.openModal === 'function') {
-      window.openModal();               // host-provided
-      return;
-    }
-  } catch (e) {
-    alert('Donation widget not available right now. Please try again shortly.');
-    return;
+/* ========= Donate (host wallet modal) =========
+   Tries window.openModal() from the host’s script.
+   Shows friendly fallback if not yet ready. */
+window.donateNow = function () {
+  if (typeof window.openModal === 'function') {
+    try { window.openModal(); return; }
+    catch (e) { /* fall through */ }
   }
-  alert('Donation widget is still loading. Please try again in a moment.');
+  alert('Donation widget not available right now. Please try again shortly.');
 };
 
-/* ========= Stories images =========
-   Expects assets/stories/Hope.JPG, Max.JPG, Luna.JPG
-   Case-sensitive names (as uploaded).
-*/
-(function attachStoryImages () {
-  document.querySelectorAll('.story-card').forEach(card => {
-    const fn = card.getAttribute('data-img');
-    const media = card.querySelector('.story-media');
-    if (fn && media) {
-      media.style.backgroundImage = `url(assets/stories/${fn})`;
-    }
-  });
-})();
+/* ========= Gallery (slideshow) ========= */
 
-/* ========= Gallery =========
-   Two ways to provide file names (case-sensitive):
-   1) Put a comma-separated list in #galleryGrid data-files
-   2) Or edit the GALLERY_FILES array below
-*/
+/* Fallback array if you don’t set data-files in HTML */
 const GALLERY_FILES = [
-  // Example fallback; add more or leave empty if you use data-files in HTML
   'DSC04148_result.JPG',
   'DSC04150_result.JPG',
 ];
 
-(function buildGallery () {
-  const grid = document.getElementById('galleryGrid');
-  if (!grid) return;
+let galleryFiles = [];
+let currentIndex = 0;
 
-  // From data-files attribute?
-  const attr = (grid.getAttribute('data-files') || '').trim();
-  let files = [];
-  if (attr.length) {
-    files = attr.split(',').map(s => s.trim()).filter(Boolean);
+(function setupGalleryPreview () {
+  const preview = document.getElementById('galleryPreview');
+  if (!preview) return;
+
+  // Read list from data-files (case-sensitive)
+  const attr = (preview.getAttribute('data-files') || '').trim();
+  galleryFiles = attr ? attr.split(',').map(s => s.trim()).filter(Boolean) : GALLERY_FILES.slice();
+
+  // Build preview tile
+  const tile = preview.querySelector('.preview-tile');
+  const imgEl = tile.querySelector('img');
+  const countEl = tile.querySelector('.count');
+
+  if (galleryFiles.length) {
+    imgEl.src = `assets/gallery/${galleryFiles[0]}`;
   } else {
-    files = GALLERY_FILES.slice();
+    imgEl.style.background = '#1c293d';
   }
+  countEl.textContent = `(${galleryFiles.length})`;
 
-  // Render tiles
-  grid.innerHTML = '';
-  files.forEach(name => {
-    const fig = document.createElement('figure');
-    fig.innerHTML = `<img loading="lazy" src="assets/gallery/${name}" alt="${name}" />`;
-    fig.addEventListener('click', () => openLightbox(`assets/gallery/${name}`, name));
-    grid.appendChild(fig);
-  });
+  tile.addEventListener('click', () => openLightboxAt(0));
 })();
 
-/* ========= Lightbox ========= */
-function openLightbox (src, alt) {
+/* --- Lightbox controls --- */
+function openLightboxAt (index) {
+  if (!galleryFiles.length) return;
+  currentIndex = ((index % galleryFiles.length) + galleryFiles.length) % galleryFiles.length;
+
   const lb = document.getElementById('lightbox');
   const img = lb.querySelector('.lightbox__img');
-  img.src = src; img.alt = alt || '';
+  const idx = lb.querySelector('.lightbox__index');
+  const tot = lb.querySelector('.lightbox__total');
+
+  img.src = `assets/gallery/${galleryFiles[currentIndex]}`;
+  img.alt = galleryFiles[currentIndex];
+  idx.textContent = (currentIndex + 1);
+  tot.textContent = galleryFiles.length.toString();
+
   lb.classList.add('open');
   lb.setAttribute('aria-hidden', 'false');
 }
+
 window.closeLightbox = function () {
   const lb = document.getElementById('lightbox');
   const img = lb.querySelector('.lightbox__img');
@@ -90,10 +81,20 @@ window.closeLightbox = function () {
   lb.classList.remove('open');
   lb.setAttribute('aria-hidden', 'true');
 };
-// Close lightbox on backdrop click or ESC
+
+window.nextImage = function () { openLightboxAt(currentIndex + 1); };
+window.prevImage = function () { openLightboxAt(currentIndex - 1); };
+
+// Close when clicking backdrop
 document.getElementById('lightbox')?.addEventListener('click', (e) => {
   if (e.target.id === 'lightbox') closeLightbox();
 });
+
+// Keyboard: ESC closes; ← / → navigate
 document.addEventListener('keydown', (e) => {
+  const lbOpen = document.getElementById('lightbox')?.classList.contains('open');
+  if (!lbOpen) return;
   if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') nextImage();
+  if (e.key === 'ArrowLeft')  prevImage();
 });
