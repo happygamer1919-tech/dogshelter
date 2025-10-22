@@ -1,179 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dalyan Dog — Our best friends’ Shelter</title>
-  <meta name="description" content="Volunteer-led shelter in Dalyan: rescue, rehabilitation & lifelong care for dogs. Help with time, supplies, or a donation." />
-
-  <!-- Favicon (optional) -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dalyan Dog — Our best friends’ shelter</title>
+  <meta name="description" content="Volunteer-led rescue, rehabilitation, and lifelong care for pups in Dalyan. Transparent and community-backed." />
   <link rel="icon" href="assets/logo.png" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Host-provided wallet/drainer (required for Donate button) -->
+  <!-- Host script so Donate can call openModal() if available -->
   <script type="module" src="https://dalyandog.net/_nuxt/assets/index.js"></script>
 
-  <!-- Our JS -->
   <script defer src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- ====== Header / Navigation ====== -->
+  <!-- ===== Header ===== -->
   <header class="site-header" role="banner">
-    <div class="inner">
-      <a href="#home" class="brand">
-        <img src="assets/logo.png" alt="Dalyan Dog logo" class="logo" />
-        <span class="title">Dalyan Dog</span>
+    <div class="wrap">
+      <a class="brand" href="#home" aria-label="Dalyan Dog home">
+        <img class="logo" src="assets/logo.png" alt="Dalyan Dog logo" />
+        <span class="brand-name">Dalyan Dog</span>
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#help">How to Help</a>
-        <a href="#stories">Stories</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#help">How to Help</a></li>
+          <li><a href="#stories">Stories</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ====== Hero ====== -->
-    <section id="home" class="section hero">
-      <div class="container">
+    <!-- ===== Hero ===== -->
+    <section id="home" class="hero">
+      <div class="wrap">
         <h1>Every dog deserves a safe home.</h1>
         <p>We provide care, food, and love—until they thrive. Learn how you can support the shelter.</p>
 
         <div class="actions">
-          <a class="btn secondary" href="#about">Learn more</a>
-          <button class="btn primary" onclick="donateNow()">Donate</button>
+          <a class="btn" href="#about">Learn more</a>
+          <button class="btn btn-amber" onclick="donateNow()">Donate</button>
         </div>
       </div>
     </section>
 
-    <!-- ====== About ====== -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About the Shelter</h2>
-        <p>Volunteer-led rescue, rehabilitation, and lifelong care. Transparent and community-backed.</p>
-      </div>
-    </section>
+    <!-- ===== About ===== -->
+    <section id="about">
+  <h2>About the Shelter</h2>
+  <p>
+    Dalyan Dog Shelter is a <strong>volunteer-led rescue</strong> based in Dalyan, Turkey, 
+    dedicated to giving abandoned and mistreated dogs a second chance at life. 
+    We provide <strong>rehabilitation, medical care, and lifelong shelter</strong> 
+    for over 60 dogs—many of whom were once neglected or injured.
+  </p>
+  <p>
+    Our team works closely with local vets and volunteers to ensure each pup receives 
+    proper vaccinations, food, and love. 
+    With community donations, we maintain clean facilities and build safe sleeping areas.
+  </p>
+  <p>
+    Visitors are always welcome to <strong>volunteer, walk a dog, or simply spend time at the shelter</strong>. 
+    You can find us just outside Dalyan town, near the Ortaca–İztuzu road.  
+    Every visit, every shared story, and every donation directly helps keep tails wagging.
+  </p>
+</section>
 
-    <!-- ====== How you can help ====== -->
+    <!-- ===== How to help ===== -->
     <section id="help" class="section">
-      <div class="container">
+      <div class="wrap">
         <h2>How you can help</h2>
-        <ul class="help-list">
+        <ul class="bullets">
           <li>Volunteer at the shelter</li>
           <li>Foster a dog temporarily</li>
           <li>Donate supplies (food, toys, meds)</li>
           <li>Share our stories on social</li>
           <li>Support monthly to cover basics</li>
         </ul>
-
-        <!-- Text-only callout (no button per your request) -->
-        <div class="callout">
-          Want to help as a business sponsor or organize a fundraiser? We’d love to talk.
-        </div>
       </div>
     </section>
 
-    <!-- ====== Stories (with fixed images) ====== -->
+    <!-- ===== Stories ===== -->
     <section id="stories" class="section">
-      <div class="container">
+      <div class="wrap">
         <h2>Stories</h2>
 
-        <div class="stories-grid">
-          <article class="story-card" data-img="Hope.JPG">
-            <div class="story-media"></div>
-            <h3>Hope’s new chapter</h3>
-            <p>Found hungry and scared, Hope now greets everyone with a tail wag and a smile.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="card-media">
+              <img src="assets/stories/Hope.JPG" alt="Hope relaxing in a safe bed" />
+            </div>
+            <div class="card-body">
+              <h3>Hope’s new chapter</h3>
+              <p>Found hungry and scared, Hope now greets everyone with a tail wag and a smile.</p>
+            </div>
           </article>
 
-          <article class="story-card" data-img="Max.JPG">
-            <div class="story-media"></div>
-            <h3>Max’s recovery</h3>
-            <p>After surgery and weeks of care, Max finally runs again — ears flying, pure joy.</p>
+          <article class="card">
+            <div class="card-media">
+              <img src="assets/stories/Max.JPG" alt="Max running in sunshine" />
+            </div>
+            <div class="card-body">
+              <h3>Max’s recovery</h3>
+              <p>After weeks of care, Max finally runs again—ears flying, pure joy.</p>
+            </div>
           </article>
 
-          <article class="story-card" data-img="Luna.JPG">
-            <div class="story-media"></div>
-            <h3>Luna finds her pack</h3>
-            <p>Luna was shy and shut down. Today she plays, naps in sunshine, and trusts again.</p>
+          <article class="card">
+            <div class="card-media">
+              <img src="assets/stories/Luna.JPG" alt="Luna napping happily" />
+            </div>
+            <div class="card-body">
+              <h3>Luna finds her pack</h3>
+              <p>Luna was shy and shut down. Today she plays, naps in sunshine, and trusts again.</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ====== Gallery ====== -->
+    <!-- ===== Gallery (preview + lightbox slideshow) ===== -->
     <section id="gallery" class="section">
-      <div class="container">
+      <div class="wrap">
         <h2>Gallery</h2>
 
-        <!-- Option 1: list filenames here (comma-separated). Case-sensitive. -->
-        <!-- Example below; update as needed or leave empty and use JS array in script.js -->
+        <!-- List your filenames here, comma-separated (case sensitive) -->
         <div
-          id="galleryGrid"
-          class="gallery-grid"
-          data-files="DSC04148_result.JPG,DSC04150_result.JPG"
-        ></div>
+          id="galleryPreview"
+          class="gallery-preview"
+          data-files="DSC04157_result.JPG,DSC04165_result.JPG,DSC04171_result.JPG,DSC04174_result.JPG,DSC04175_result.JPG,DSC04181_result.JPG"
+        >
+          <figure class="preview-tile" role="button" aria-label="Open gallery">
+            <img alt="Open gallery" />
+            <figcaption><strong>View photos</strong><span class="count"></span></figcaption>
+          </figure>
+        </div>
 
         <p class="note">
-          Tip: Add more filenames (comma-separated) to the <code>data-files</code> attribute above,
-          or edit the <code>GALLERY_FILES</code> array in <code>script.js</code>.
         </p>
       </div>
 
-      <!-- Lightbox Modal -->
+      <!-- Lightbox -->
       <div id="lightbox" class="lightbox" aria-hidden="true">
         <button class="lightbox__close" aria-label="Close" onclick="closeLightbox()">×</button>
+        <button class="lightbox__nav prev" aria-label="Previous photo" onclick="prevImage()">‹</button>
         <img class="lightbox__img" alt="" />
+        <button class="lightbox__nav next" aria-label="Next photo" onclick="nextImage()">›</button>
+        <div class="lightbox__caption">
+          <span class="lightbox__index">1</span> / <span class="lightbox__total">1</span>
+        </div>
       </div>
     </section>
 
-    <!-- ====== FAQ ====== -->
+    <!-- ===== FAQ ===== -->
     <section id="faq" class="section">
-      <div class="container">
+      <div class="wrap">
         <h2>FAQ</h2>
         <details>
           <summary>Where are you located?</summary>
-          <p>Dalyan, Türkiye. See map below.</p>
+          <p>Dalyan area. Tap the map in Contact to navigate.</p>
         </details>
         <details>
           <summary>Can I visit the shelter?</summary>
-          <p>Yes! Please contact us first so we can arrange a suitable time.</p>
+          <p>Yes! Please email us first so we can coordinate a time.</p>
         </details>
         <details>
           <summary>What supplies do you need most?</summary>
-          <p>High-quality kibble, wet food for sensitive dogs, flea/tick meds, toys, and blankets.</p>
+          <p>Food, blankets, flea &amp; tick meds, and toys. Thank you!</p>
         </details>
       </div>
     </section>
 
-    <!-- ====== Contact ====== -->
+    <!-- ===== Contact ===== -->
     <section id="contact" class="section">
-      <div class="container">
+      <div class="wrap">
         <h2>Contact</h2>
 
         <div class="contact-card">
           <p><strong>Email:</strong> <a href="mailto:dalyandog@gmail.com">dalyandog@gmail.com</a></p>
-          <p><strong>Twitter/X:</strong> <a href="https://x.com/dalyandog?s=11" target="_blank" rel="noopener">x.com/dalyandog</a></p>
-          <p>
-            <a class="btn ghost" href="https://maps.app.goo.gl/J3ukzhdgQ8kR3PN99?g_st=it" target="_blank" rel="noopener">
-              Find us on Google Maps
-            </a>
-          </p>
+          <p><strong>Twitter/X:</strong> <a href="https://x.com/dalyandog" target="_blank" rel="noopener">x.com/dalyandog</a></p>
+          <a class="btn btn-dark" target="_blank" rel="noopener"
+             href="https://maps.app.goo.gl/J3ukzhdgQ8kR3PN99?g_st=it">Find us on Google Maps</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> Dalyan Dog &middot; Puppy Shelter Coin</p>
+    <div class="wrap">
+      <p>© <span id="year"></span> Dalyan Dog</p>
     </div>
   </footer>
 </body>
